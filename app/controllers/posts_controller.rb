@@ -7,12 +7,14 @@ class PostsController < ApplicationController
 
   # Get data for only one posts
   def show
+    @post = Post.find(params[:id])
     render json: @post
   end
 
   # POST a new post /posts
   def create
     @post = Post.new(post_params)
+
     if @post.save
       render json: @post, status: :created, location: @post
     else
@@ -30,8 +32,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
-    head :no_content
+    head :no_content, status: :ok
   end
 
   private
