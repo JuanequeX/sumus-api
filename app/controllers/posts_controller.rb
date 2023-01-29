@@ -24,6 +24,7 @@ class PostsController < ApplicationController
 
   # PUT /posts/1
   def update
+    @post = Post.find(params[:id])
     if @post.update(post_params)
       render json: @post
     else
@@ -39,6 +40,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:email, :comment)
     end
 end
